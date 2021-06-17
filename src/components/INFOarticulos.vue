@@ -1,13 +1,16 @@
 <template>
-    <div>
+    <div class="divInfo">
         <h1>ABM articulos</h1>
-        <button @click="desplegarFormArticulo('Crear')">Crear nuevo articulo</button>
+        <button @click="desplegarABMArticulo('Crear')">Crear nuevo articulo</button>
         <br>
         <br>
-        <FormAltaArticulos 
-            v-if="abrirFormAlta == true"
-            @MostrarABMArticulos="MostrarABMArticulos($event)">
-        </FormAltaArticulos>
+        <ABMarticuloss 
+            v-if="abrirABMarticulo == true"
+            :accion=accion
+            :id=id
+            @MostrarABMArticulos="MostrarABMArticulos($event)"
+            @traerArticulos="traerArticulos()"
+            />
 
         <table>
             <thead>
@@ -34,9 +37,11 @@
                     <td>{{ articulo.stockMaximo }}</td>
 
                     <td>
-                        <input type="button" value="Editar"> 
+                        <input type="button" value="Editar"
+                                @click="desplegarABMArticulo('Editar', articulo.id)"> 
                         <br> 
-                        <input type="button" value="Borrar"> 
+                        <input type="button" value="Borrar"
+                                @click="desplegarABMArticulo('Borrar', articulo.id)"> 
                     </td> 
                 </tr>
             </tbody>
@@ -46,43 +51,48 @@
 
 <script>
     import traerAPI from "../mixins/traerAPI.vue";
-    import FormAltaArticulos from "../components/FormAltaArticulos.vue";
+    import ABMarticuloss from "../components/ABMarticuloss.vue";
 
     export default {
-        name: "Articulos",
+        name: "INFOArticulos",
 
         components: {
-            FormAltaArticulos,
+            ABMarticuloss,
         },
 
         mixins: [traerAPI],
 
         created(){
-            this.traerDatos();     
+            this.traerArticulos();     
         },
 
         data(){
             return {
                 articulos: [],
-                abrirFormAlta: false,
+                abrirABMarticulo: false,
+                accion: "",
+                id: 0,
             }
         },
 
         methods:{
-            traerDatos(){
+            traerArticulos(){
+                console.log("Obteniendo ARTICULOS desde la API...");
                 this.traerDatosAPI("articulos")
                 .then(datos => {
                     this.articulos = datos
                 })
             },
 
-            desplegarFormArticulo(){
-                this.abrirFormAlta = !this.abrirFormAlta;
+            desplegarABMArticulo(accion, id=0){
+                this.accion= accion;
+                this.id = id;
+                this.abrirABMarticulo = !this.abrirABMarticulo;
             },
 
             MostrarABMArticulos(ver){
-                this.abrirFormAlta = ver
-                this.traerDatos();
+                this.abrirABMarticulo = ver
+                this.traerArticulos();
             }
             
         }
@@ -90,7 +100,7 @@
 </script>
 
 <style scoped>
-    div{
+    .divInfo{
         margin-top: 2%;   
         border-style: double;
         width: 60%;
@@ -101,11 +111,11 @@
     table, th, td{
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
+        margin-top: 2%;
         margin-left: 9%;
         margin-bottom: 50px;
         background-color: rgb(255, 255, 255);
     }
 
     
-
 </style>

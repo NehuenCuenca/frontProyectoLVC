@@ -1,12 +1,15 @@
 <template>
-    <div>
+    <div class="divInfo"> 
         <h1>ABM rubros</h1>
-        <button @click="desplegarFormRubro('Crear')">Crear nuevo rubro</button>
+        <button @click="desplegarABMRubro('Crear')">Crear nuevo rubro</button>
         <br>
         <br>
-        <FormAltaRubros 
-            v-if="abrirFormAlta == true"
+        <ABMrubros 
+            v-if="abrirABMrubro == true"
             @MostrarABMRubros="MostrarABMRubros($event)"
+            @traerDatos="traerDatos"
+            :id=id
+            :accion=accion
         />
     
         <table>
@@ -24,9 +27,13 @@
                     <td>{{ rubro.titulo }}</td>
 
                     <td>
-                        <input type="button" value="Editar"> 
+                        <input type="button" 
+                                value="Editar" 
+                               @click="desplegarABMRubro('Editar', rubro.id)"
+                               > 
                         <br> 
-                        <input type="button" value="Borrar">
+                        <input type="button" value="Borrar"
+                                @click="desplegarABMRubro('Borrar', rubro.id)">
                     </td>
                 </tr>
             </tbody>
@@ -38,15 +45,15 @@
 
 <script>
     import traerAPI from "../mixins/traerAPI.vue";
-    import FormAltaRubros from "../components/FormAltaRubros.vue";
+    import ABMrubros from "../components/ABMrubros.vue";
 
     export default {
-        name: "Rubros",
+        name: "INFORubros",
 
         mixins: [traerAPI],
         
         components: {
-            FormAltaRubros,
+            ABMrubros,
         },
 
         created(){
@@ -56,26 +63,31 @@
         data(){
             return {
                 rubros: [],
-                abrirFormAlta: false,
+                abrirABMrubro: false,
+                accion: "",
+                id: 0,
             }
         },
 
         methods:{
             traerDatos(){
+                console.log("Obteniendo RUBROS desde la API...");
                 this.traerDatosAPI("rubros")
                     .then(datos => {
                         this.rubros = datos
                     })      
             },
 
-            desplegarFormRubro(){
-                this.abrirFormAlta = !this.abrirFormAlta;
+            desplegarABMRubro(accion, id=0){
+                this.accion= accion;
+                this.id= id;
+                this.abrirABMrubro = !this.abrirABMrubro;
             },
 
             MostrarABMRubros(ver){
-                this.abrirFormAlta = ver
+                this.abrirABMrubro = ver
                 this.traerDatos();
-            }
+            },
 
         },
 
@@ -84,7 +96,7 @@
 
 <style scoped>
 
-    div{
+    .divInfo{
         margin-top: 2%;     
         border-style: double;
         width: 60%;
@@ -93,6 +105,7 @@
     }
 
     table, th, td{
+        margin-top: 2%;
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
         margin-left: 30%;
