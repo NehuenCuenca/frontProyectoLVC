@@ -2,7 +2,7 @@
     <div>
         <div class="formAgregar" v-if="accion != 'Borrar'">
             <h3>{{ accion }} articulo</h3>
-            <form>
+            <form @submit.prevent>
                 <span>Nombre</span>
                 <input type="text" v-model="datosArticulos.nombre">
                 <br>
@@ -83,8 +83,8 @@ export default {
 
         btnCancelar(){
             this.$emit("MostrarABMArticulos", false)
-        }
-    
+        },  
+
     },
     
 }

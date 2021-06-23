@@ -2,7 +2,7 @@
     <div>
         <div class="formABM" v-if="accion != 'Borrar'">
             <h4>{{ accion }} rubro</h4>
-            <form>
+            <form @submit.prevent>
                 <span>Nombre:</span>
                 <input type="text" placeholder="Nombre rubro..." v-model="datosRubros.titulo">
                 <br>
@@ -40,19 +40,26 @@ export default {
         if(this.accion != "Crear"){
             this.traerDatosPorId('rubros', this.id)
                 .then(datos => {
-                        console.log(datos)
-                        this.datosRubros = datos
-                    })
+                    console.log(datos)
+                    this.datosRubros = datos
+                })
         }
     },
 
     methods: {
         guardarRubro(){
             if(this.accion == "Crear"){
-                this.enviarDatosAPI('rubros', this.datosRubros)
-                    .then(datos => {
-                        this.datosRubros = datos     
-                    }) 
+                console.log("validar: "+this.validarCamposVacios())
+                if(this.validarCamposVacios()){
+                    alert("Rellene todos los campos del formulario, por favor");
+                    return
+                }else {
+                    console.log("Datos enviados")
+                    /* this.enviarDatosAPI("rubros", this.datosRubros)
+                        .then(datos => {
+                            this.datosRubros = datos
+                    }) */
+                }     
             } else if(this.accion == "Editar") {
                 this.editarDatos('rubros', this.datosRubros, this.id)
                     .then(datos => {
@@ -68,7 +75,13 @@ export default {
         
         cancelarForm(){
             this.$emit("MostrarABMRubros", false)
-        }
+        },
+
+        validarCamposVacios(){
+            let titulo = JSON.stringify(this.datosRubros.titulo.trim());
+            console.log(titulo)
+            return (titulo === "" ? true : false)
+        },
 
     },
 }

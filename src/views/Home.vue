@@ -4,9 +4,11 @@
     <div class="divBtnInfos">
       <button @click="desplegarArticulosABM()" class="btnAbrirABM">Articulos ABM</button>
       <button @click="desplegarRubrosABM()" class="btnAbrirABM">Rubros ABM</button>
+      <button @click="desplegarComprobantesABM()" class="btnAbrirABM">Comprobantes ABM</button>
     </div>
     <INFOarticulos v-if="abrirArticulosABM == true"></INFOarticulos>
     <INFOrubros v-if="abrirRubrosABM == true"></INFOrubros>
+    <INFOcomprobantes v-if="abrirComprobantesABM == true"/>
   </div>
 </template>
 
@@ -14,6 +16,7 @@
 // @ is an alias to /src
 import INFOarticulos from "../components/INFOarticulos.vue";
 import INFOrubros from "../components/INFOrubros.vue";
+import INFOcomprobantes from "../components/INFOcomprobantes.vue";
 
 export default {
   
@@ -22,12 +25,14 @@ export default {
   components: {
     INFOarticulos,
     INFOrubros,
+    INFOcomprobantes,
   },
 
   data() {
     return {
       abrirArticulosABM: false,
       abrirRubrosABM: false,
+      abrirComprobantesABM: false,
     }
   },
 
@@ -35,11 +40,19 @@ export default {
     desplegarArticulosABM(){
       this.abrirArticulosABM= !this.abrirArticulosABM;
       this.abrirRubrosABM= false;
+      this.abrirComprobantesABM= false;
     },
     
     desplegarRubrosABM(){
-      this.abrirArticulosABM= false;
       this.abrirRubrosABM= !this.abrirRubrosABM;
+      this.abrirArticulosABM= false;
+      this.abrirComprobantesABM= false;
+    },
+
+    desplegarComprobantesABM(){
+      this.abrirComprobantesABM= !this.abrirComprobantesABM;
+      this.abrirArticulosABM= false;
+      this.abrirRubrosABM= false;
     }
 
   },
@@ -73,7 +86,7 @@ export default {
   .divBtnInfos button {
     background-color: gainsboro;
     height: 60px;
-    width: 100px;
+    width: 160px;
     margin: 10px;
     text-align: center;
     border: 2px solid black;

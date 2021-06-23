@@ -1,6 +1,6 @@
 <template>
     <div class="divInfo">
-        <h1>ABM articulos</h1>
+        <h1>Articulos</h1>
         <button @click="desplegarABMArticulo('Crear')">Crear nuevo articulo</button>
         <br>
         <br>
@@ -106,6 +106,7 @@
         width: 60%;
         margin-left: 20%;
         background-color: rgb(242, 250, 172);
+        margin-bottom: 25px;
     }
 
     table, th, td{
@@ -113,7 +114,7 @@
         border-collapse: collapse;
         margin-top: 2%;
         margin-left: 9%;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         background-color: rgb(255, 255, 255);
     }
 

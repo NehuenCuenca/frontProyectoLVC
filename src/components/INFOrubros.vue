@@ -1,6 +1,6 @@
 <template>
     <div class="divInfo"> 
-        <h1>ABM rubros</h1>
+        <h1>Rubros</h1>
         <button @click="desplegarABMRubro('Crear')">Crear nuevo rubro</button>
         <br>
         <br>
@@ -102,6 +102,7 @@
         width: 60%;
         margin-left: 20%;
         background-color: rgb(186, 190, 247);
+        margin-bottom: 25px;
     }
 
     table, th, td{
@@ -109,7 +110,7 @@
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
         margin-left: 30%;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         background-color: rgb(255, 255, 255);
     }
 
