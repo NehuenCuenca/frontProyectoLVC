@@ -17,7 +17,11 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre_articulo</th>
+                    <th>FechaVencimiento</th>
                     <th>Rubro_id</th>
+                    <th>Precio</th>
+                    <th>S_Minimo</th>
+                    <th>S_Maximo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -26,17 +30,18 @@
                 <tr v-for="(articulo, index) in articulos" :key="index">
                     <td>{{ articulo.id }}</td>
                     <td>{{ articulo.nombre }}</td>
+                    <td>{{ articulo.fechaVencimiento }}</td>
                     <td>{{ articulo.rubro_id }}</td>
+                    <td>${{ articulo.precio }}</td>
+                    <td>{{ articulo.stockMinimo }}</td>
+                    <td>{{ articulo.stockMaximo }}</td>
 
                     <td>
                         <input type="button" value="Editar"
-                            @click="desplegarABMArticulo('Editar', articulo.id)"> 
+                                @click="desplegarABMArticulo('Editar', articulo.id)"> 
                         <br> 
                         <input type="button" value="Borrar"
-                            @click="desplegarABMArticulo('Borrar', articulo.id)"> 
-                        <br>
-                        <input type="button" value="Consultar"
-                            @click="desplegarABMArticulo('Consultar', articulo.id)">
+                                @click="desplegarABMArticulo('Borrar', articulo.id)"> 
                     </td> 
                 </tr>
             </tbody>
@@ -108,7 +113,7 @@
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
         margin-top: 2%;
-        margin-left: 30%;
+        margin-left: 9%;
         margin-bottom: 30px;
         background-color: rgb(255, 255, 255);
     }

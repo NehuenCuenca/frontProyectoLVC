@@ -33,7 +33,7 @@
                                > 
                         <br> 
                         <input type="button" value="Borrar"
-                                @click="desplegarABMRubro('Borrar', rubro.id)">              
+                                @click="desplegarABMRubro('Borrar', rubro.id)">
                     </td>
                 </tr>
             </tbody>

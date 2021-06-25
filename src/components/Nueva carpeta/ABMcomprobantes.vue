@@ -66,23 +66,14 @@ export default {
     methods: {
         guardarComprobante(){
             if(this.accion == "Crear"){
-                if(this.validarCamposVacios()){
-                    alert("Rellene los campos vacios o revise que los datos que esta ingresando sean COHERENTES")
-                    return
-                }else{
-                this.enviarDatosAPI("comprobantes-cabeza", this.datosComprobantes)
+                console.log(this.datosComprobantes); 
+                /* this.enviarDatosAPI("comprobantes-cabeza", this.datosComprobantes)
                     .then(datos => {
                         this.datosComprobantes = datos
-                    }) 
-                } 
+                    })  */    
             } else if(this.accion == "Editar"){
-                if(this.validarCamposVacios()){
-                    alert("Rellene los campos vacios o revise que los datos que esta ingresando sean COHERENTES")
-                    return
-                }else{
                 //this.editarDatos("comprobantes-cabeza", this.datosComprobantes, this.id)
                 console.log("Editar datos...")
-                }
             }
 
             this.$emit("MostrarABMComprobantes", false)
@@ -93,22 +84,9 @@ export default {
             this.$emit("MostrarABMComprobantes", false)
         },
 
-        validarCamposVacios(){
-            let codComproobante= this.datosComprobantes.codigoComprobante
-            let tipoDeOperacion= this.datosComprobantes.tipoOperacion
-            let fecha= this.datosComprobantes.fecha
-            let id_articulo= this.datosComprobantes.articulosPedidos.id
-            let cantidad_articulo= this.datosComprobantes.articulosPedidos.cantidad
+        
 
-            if(codComproobante < 1 || codComproobante.length > 20 || tipoDeOperacion === ""
-                || fecha === "" || id_articulo < 1 || cantidad_articulo < 1){
-                return true
-            }
-            else{
-                return false
-            }
 
-        },
 
     },
 }
