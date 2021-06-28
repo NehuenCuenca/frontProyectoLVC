@@ -109,7 +109,7 @@
         margin-top: 2%;
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
-        margin-left: 30%;
+        margin-left: 25%;
         margin-bottom: 30px;
         background-color: rgb(255, 255, 255);
     }

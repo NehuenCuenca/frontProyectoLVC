@@ -141,7 +141,7 @@ export default {
         margin-top: 2%;
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
-        margin-left: 35%;
+        margin-left: 23%;
         margin-bottom: 30px;
         background-color: rgb(255, 255, 255);
     }

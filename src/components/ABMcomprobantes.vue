@@ -19,13 +19,13 @@
                 <br>
                 <br>
                 <span>Id Articulo 1</span>
-                <input type="text" name="datosComprobantes.articulosPedidos " 
-                    v-model="datosComprobantes.articulosPedidos[0].id" >             
+                <input type="text" name="datosComprobantes.datosPedidos" 
+                    v-model="datosComprobantes.datosPedidos[0].id_art" >             
                 <br>   
                 <br>
                 <span>Cantidad Articulo 1</span>
-                <input type="text" name="datosComprobantes.articulosPedidos" 
-                    v-model="datosComprobantes.articulosPedidos[0].cantidad" >             
+                <input type="text" name="datosComprobantes.datosPedidos" 
+                    v-model="datosComprobantes.datosPedidos[0].cantidad_art">             
                 <br>   
                 <br>
                 <button @click="btnCancelar()">Cancelar</button>
@@ -48,15 +48,15 @@ export default {
         return {
             datosComprobantes:{
                 codigoComprobante: "",
+                fecha: "",
                 tipoOperacion: {
                     1: "compra",
                     2: "venta",
                 },
-                fecha: "",
-                articulosPedidos:[
+                datosPedidos:[
                     {  
-                        id:"0", 
-                        cantidad: "0",
+                        id_art:"0", 
+                        cantidad_art: "0",
                     },
                 ],
             }, 
@@ -70,10 +70,10 @@ export default {
                     alert("Rellene los campos vacios o revise que los datos que esta ingresando sean COHERENTES")
                     return
                 }else{
-                this.enviarDatosAPI("comprobantes-cabeza", this.datosComprobantes)
+                 this.enviarDatosAPI("comprobantes-cabeza", this.datosComprobantes)
                     .then(datos => {
                         this.datosComprobantes = datos
-                    }) 
+                    })  
                 } 
             } else if(this.accion == "Editar"){
                 if(this.validarCamposVacios()){
@@ -97,8 +97,8 @@ export default {
             let codComproobante= this.datosComprobantes.codigoComprobante
             let tipoDeOperacion= this.datosComprobantes.tipoOperacion
             let fecha= this.datosComprobantes.fecha
-            let id_articulo= this.datosComprobantes.articulosPedidos.id
-            let cantidad_articulo= this.datosComprobantes.articulosPedidos.cantidad
+            let id_articulo= this.datosComprobantes.datosPedidos.id_art
+            let cantidad_articulo= this.datosComprobantes.datosPedidos.cantidad_art
 
             if(codComproobante < 1 || codComproobante.length > 20 || tipoDeOperacion === ""
                 || fecha === "" || id_articulo < 1 || cantidad_articulo < 1){
