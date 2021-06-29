@@ -6,6 +6,7 @@
                 <span>Nombre:</span>
                 <input type="text" placeholder="Nombre rubro..." v-model="datosRubros.titulo">
                 <br>
+                <br>
                 <button @click="cancelarForm()">Cancelar</button>
                 <button @click="guardarRubro()">Enviar</button>
             </form>
@@ -91,8 +92,10 @@ export default {
                 console.log(this.id)
                 this.borrarDatos('rubros', this.id)
             }
+
+            //this.$emit("traerDatos");
+            setTimeout(() => this.$emit("MostrarABMRubros", false), 300)
             this.$emit("traerDatos");
-            this.$emit("MostrarABMRubros", false);
         },
         
         cancelarForm(){
@@ -118,7 +121,7 @@ export default {
         border-radius: 5%;
         background-color: rgb(223, 226, 193);
         margin-bottom: 30px;
-        height: 120px;
+        height: 140px;
         width: 45%;
     }
     

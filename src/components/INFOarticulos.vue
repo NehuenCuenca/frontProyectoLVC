@@ -9,7 +9,6 @@
             :accion=accion
             :id=id
             @MostrarABMArticulos="MostrarABMArticulos($event)"
-            @traerArticulos="traerArticulos()"
             />
 
         <table>

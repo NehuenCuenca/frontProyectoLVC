@@ -19,7 +19,14 @@
                 <input type="text" v-model="datosArticulos.stockMaximo">
                 <br>
                 <span>Rubro_id</span>
-                <input type="text" v-model="datosArticulos.rubro_id">
+                <select name="rubro_id" v-model="datosArticulos.rubro_id">
+                    <option v-for="(rubro, $id) in rubros" 
+                        :key="$id"
+                        :value="rubro.id">
+                            {{rubro.id}}| {{rubro.titulo}}
+                    </option>
+                </select>
+                <br>
                 <br>
                 <button @click="btnCancelar()">Cancelar</button>
                 <button @click="guardarArticulo()">Enviar</button>
@@ -91,7 +98,8 @@ export default {
     },
 
     created(){
-
+        this.traerRubros();
+        
     },
 
     mounted(){
@@ -110,10 +118,10 @@ export default {
                     alert("Rellene los campos vacios o revise que los datos que esta ingresando sean COHERENTES")
                     return
                 }else {
-                    this.enviarDatosAPI("articulos", this.datosArticulos)
+                     this.enviarDatosAPI("articulos", this.datosArticulos)
                         .then(datos => {
                             this.datosArticulos = datos
-                    }) 
+                    })  
                 }
                 
             } else if(this.accion == "Editar"){
@@ -128,7 +136,8 @@ export default {
                 this.borrarDatos("articulos", this.id)
             }
 
-            this.$emit("MostrarABMArticulos", false)
+            setTimeout(() => this.$emit("MostrarABMArticulos", false), 300)
+            //this.$emit("MostrarABMArticulos", false)
             this.$emit("traerArticulos");
         },
 
@@ -153,10 +162,10 @@ export default {
         },
 
         traerRubros(){
-            this.traerAPI("rubros")
+            this.traerDatosAPI("rubros")
                 .then(datos => {
                         this.rubros = datos
-                    }) 
+                    })
         },
 
     },

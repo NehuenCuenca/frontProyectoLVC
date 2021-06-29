@@ -7,7 +7,6 @@
         <ABMrubros 
             v-if="abrirABMrubro == true"
             @MostrarABMRubros="MostrarABMRubros($event)"
-            @traerDatos="traerDatos"
             :id=id
             :accion=accion
         />
