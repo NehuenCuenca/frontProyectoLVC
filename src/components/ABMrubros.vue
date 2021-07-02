@@ -93,9 +93,7 @@ export default {
                 this.borrarDatos('rubros', this.id)
             }
 
-            //this.$emit("traerDatos");
             setTimeout(() => this.$emit("MostrarABMRubros", false), 300)
-            this.$emit("traerDatos");
         },
         
         cancelarForm(){
@@ -115,13 +113,16 @@ export default {
 
 <style scoped>
     .formABM{
-        text-align: center;
-        margin-left: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 28%;
         border: 2px solid black;
         border-radius: 5%;
         background-color: rgb(223, 226, 193);
         margin-bottom: 30px;
-        height: 140px;
+        min-height: 140px;
         width: 45%;
     }
     
@@ -130,7 +131,6 @@ export default {
         width: 62%;
         border: 2px solid black;
         border-radius: 5%;
-        margin-left: 20%;
         background-color: rgb(241, 95, 115);
     }
 
@@ -144,13 +144,16 @@ export default {
         margin-top: 2%;
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
-        margin-left: 23%;
         margin-bottom: 30px;
         background-color: rgb(255, 255, 255);
     }
 
     .marco{
-        margin-left: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 20%; 
         margin-bottom: 5%;
         padding: 10px;
         border: 2px solid black;
@@ -161,7 +164,7 @@ export default {
     }
 
     .divBtns{
-        margin-top: 1px;
+        margin-top: 20px;
         margin-bottom: 10px;
     }
 </style>

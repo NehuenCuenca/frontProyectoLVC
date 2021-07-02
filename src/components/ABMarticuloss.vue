@@ -6,19 +6,24 @@
                 <span>Nombre</span>
                 <input type="text" v-model="datosArticulos.nombre">
                 <br>
+                <br>
                 <span>Precio</span>
                 <input type="text" v-model="datosArticulos.precio">
+                <br>
                 <br>
                 <span>Fecha Vencimiento</span>
                 <input type="date" v-model="datosArticulos.fechaVencimiento">
                 <br>
+                <br>
                 <span>Stock min</span>
                 <input type="text" v-model="datosArticulos.stockMinimo">
+                <br>
                 <br>
                 <span>Stock max</span>
                 <input type="text" v-model="datosArticulos.stockMaximo">
                 <br>
-                <span>Rubro_id</span>
+                <br>
+                <span>Rubro</span>
                 <select name="rubro_id" v-model="datosArticulos.rubro_id">
                     <option v-for="(rubro, $id) in rubros" 
                         :key="$id"
@@ -28,8 +33,12 @@
                 </select>
                 <br>
                 <br>
-                <button @click="btnCancelar()">Cancelar</button>
-                <button @click="guardarArticulo()">Enviar</button>
+                <hr>
+                <div class="divBtns">
+                    <button @click="btnCancelar()">Cancelar</button> | 
+                    <button @click="guardarArticulo()">Enviar</button>
+                </div>
+                
             </form>
         </div>
         
@@ -40,22 +49,23 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre_articulo</th>
-                            <th>FechaVencimiento</th>
-                            <th>Rubro_id</th>
+                            <th>Rubro</th>
                             <th>Precio</th>
+                            <th>FechaVencimiento</th>
                             <th>S_Minimo</th>
                             <th>S_Maximo</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>{{ datosArticulos.id }}</td>
-                            <td>{{ datosArticulos.nombre }}</td>
-                            <td>{{ datosArticulos.fechaVencimiento }}</td>
-                            <td>{{ datosArticulos.rubro_id }}</td>
-                            <td>${{ datosArticulos.precio }}</td>
-                            <td>{{ datosArticulos.stockMinimo }}</td>
-                            <td>{{ datosArticulos.stockMaximo }}</td>            
+                        <tr >
+                            <td>{{datosArticulos.id}}</td>
+                            <td>{{datosArticulos.nombre}}</td>
+                            <td>{{datosArticulos.fechaVencimiento}}</td>
+                            <td>{{datosArticulos.nombre_rubro}} | {{datosArticulos.rubro_id}}</td>
+                            <td>{{datosArticulos.precio}}</td>
+                            <td>{{datosArticulos.stockMinimo}}</td>
+                            <td>{{datosArticulos.stockMaximo}}</td>
+
                         </tr>
                     </tbody>
                 </table>
@@ -91,23 +101,24 @@ export default {
                 stockMinimo: "",
                 stockMaximo: "",
                 rubro_id: "",
+                nombre_rubro:"",
             },
+
 
             rubros: [],
         }
     },
 
-    created(){
-        this.traerRubros();
-        
-    },
-
     mounted(){
-        if(this.accion != "Crear"){
+        if(this.accion == "Editar" || this.accion == "Borrar" || this.accion == "Consultar"){
             this.traerDatosPorId("articulos", this.id)
                 .then(datos => {
                     this.datosArticulos = datos
+                    console.log(JSON.stringify(this.datosArticulos))
                 })
+            this.traerRubros();
+        } else if(this.accion == "Crear"){
+            this.traerRubros();
         }
     },
 
@@ -130,6 +141,9 @@ export default {
                     return
                 }else{
                     this.editarDatos("articulos", this.datosArticulos, this.id)
+                        .then(datos => {
+                            this.datosArticulos = datos     
+                        })
                 }
                 
             } else {
@@ -176,14 +190,16 @@ export default {
 
 <style scoped>
     .formAgregar{
-        margin-top: 0px;
-        text-align: center;
-        margin-left: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 27%;
         border: 2px solid black;
         border-radius: 5%;
         background-color: rgb(223, 226, 193);
-        margin-bottom: 30px;
-        height: 235px;
+        margin-bottom: 0px;
+        min-height: 40%;
         width: 45%;
     }
 
@@ -192,7 +208,7 @@ export default {
         width: 45%;
         border: 2px solid black;
         border-radius: 5%;
-        margin-left: 28%;
+        margin-left: 25%;
         background-color: rgb(241, 95, 115);
     }
 
@@ -203,11 +219,11 @@ export default {
     }
 
     table, th, td{
+        margin:30px;
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
         margin-top: 2%;
-        margin-left: 10%;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         background-color: rgb(255, 255, 255);
     }
 
@@ -219,5 +235,10 @@ export default {
         height: 15%;
         width: 90%;
         background-color: rgb(223, 226, 193)
+    }
+
+    .divBtns{
+        margin-top: 20px;
+        margin-bottom: 10px;
     }
 </style>

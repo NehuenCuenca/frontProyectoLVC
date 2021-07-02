@@ -16,16 +16,16 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre_articulo</th>
-                    <th>Rubro_id</th>
+                    <th>Rubro</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             
             <tbody>
-                <tr v-for="(articulo, index) in articulos" :key="index">
+                <tr v-for="(articulo, id) in articulos" :key="id">
                     <td>{{ articulo.id }}</td>
                     <td>{{ articulo.nombre }}</td>
-                    <td>{{ articulo.rubro_id }}</td>
+                    <td>[{{articulo.rubro_id}}] | {{ articulo.nombre_rubro }} </td>
 
                     <td>
                         <input type="button" value="Editar"
@@ -65,7 +65,7 @@
                 articulos: [],
                 abrirABMarticulo: false,
                 accion: "",
-                id: 0,
+                id: 4,
             }
         },
 
@@ -95,11 +95,12 @@
 
 <style scoped>
     .divInfo{
+        
         margin-top: 2%;   
         border-style: double;
         width: 60%;
         margin-left: 20%;
-        background-color: rgb(242, 250, 172);
+        background-color: rgb(229, 235, 162);
         margin-bottom: 25px;
     }
 
@@ -107,7 +108,7 @@
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
         margin-top: 2%;
-        margin-left: 30%;
+        margin-left: 15%;
         margin-bottom: 30px;
         background-color: rgb(255, 255, 255);
     }

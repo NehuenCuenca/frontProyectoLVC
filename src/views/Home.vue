@@ -6,9 +6,12 @@
       <button @click="desplegarRubrosABM()" class="btnAbrirABM">Rubros ABM</button>
       <button @click="desplegarComprobantesABM()" class="btnAbrirABM">Comprobantes ABM</button>
     </div>
-    <INFOarticulos v-if="abrirArticulosABM == true"></INFOarticulos>
-    <INFOrubros v-if="abrirRubrosABM == true"></INFOrubros>
-    <INFOcomprobantes v-if="abrirComprobantesABM == true"/>
+    <div class="ABMestilo">
+      <INFOarticulos v-if="abrirArticulosABM == true"></INFOarticulos>
+      <INFOrubros v-if="abrirRubrosABM == true"></INFOrubros>
+      <INFOcomprobantes v-if="abrirComprobantesABM == true"/>
+    </div>
+    
   </div>
 </template>
 
@@ -76,7 +79,7 @@ export default {
   .divBtnInfos{
     display: flex;
     align-content: space-between;
-    background-color: rgb(196, 241, 165);
+    background-color: rgb(250, 214, 114);
     padding: 10px;
     border: 2px solid black;
     justify-content: center;
@@ -84,7 +87,7 @@ export default {
   }
 
   .divBtnInfos button {
-    background-color: gainsboro;
+    background-color: rgb(247, 238, 238);
     height: 60px;
     width: 160px;
     margin: 10px;
@@ -95,5 +98,11 @@ export default {
     font-size: 20px;
     font-weight: bolder;
   }  
+
+  .ABMestilo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
 </style>
