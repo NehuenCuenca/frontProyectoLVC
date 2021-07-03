@@ -73,7 +73,7 @@ export default {
   }
 
   .titulo{
-    margin-top: -40px;
+    margin: -40px auto 40px auto;
   }
 
   .divBtnInfos{
@@ -89,8 +89,8 @@ export default {
   .divBtnInfos button {
     background-color: rgb(247, 238, 238);
     height: 60px;
-    width: 160px;
-    margin: 10px;
+    min-width: 160px;
+    margin: 10px 10px 10px 10px;
     text-align: center;
     border: 2px solid black;
     border-radius: 10%;

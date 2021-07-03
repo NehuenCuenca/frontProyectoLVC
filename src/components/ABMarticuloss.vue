@@ -3,27 +3,27 @@
         <div class="formAgregar" v-if="(accion == 'Crear') || (accion =='Editar')">
             <h3>{{ accion }} articulo</h3>
             <form @submit.prevent>
-                <span>Nombre</span>
+                <span>Nombre: </span>
                 <input type="text" v-model="datosArticulos.nombre">
                 <br>
                 <br>
-                <span>Precio</span>
+                <span>Precio: </span>
                 <input type="text" v-model="datosArticulos.precio">
                 <br>
                 <br>
-                <span>Fecha Vencimiento</span>
+                <span>Fecha Vencimiento: </span>
                 <input type="date" v-model="datosArticulos.fechaVencimiento">
                 <br>
                 <br>
-                <span>Stock min</span>
+                <span>Stock min: </span>
                 <input type="text" v-model="datosArticulos.stockMinimo">
                 <br>
                 <br>
-                <span>Stock max</span>
+                <span>Stock max: </span>
                 <input type="text" v-model="datosArticulos.stockMaximo">
                 <br>
                 <br>
-                <span>Rubro</span>
+                <span>Rubro: </span>
                 <select name="rubro_id" v-model="datosArticulos.rubro_id">
                     <option v-for="(rubro, $id) in rubros" 
                         :key="$id"
@@ -194,11 +194,10 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-left: 27%;
+        margin:5px auto 30px auto;
         border: 2px solid black;
         border-radius: 5%;
         background-color: rgb(223, 226, 193);
-        margin-bottom: 0px;
         min-height: 40%;
         width: 45%;
     }
@@ -208,7 +207,7 @@ export default {
         width: 45%;
         border: 2px solid black;
         border-radius: 5%;
-        margin-left: 25%;
+        margin:20px auto 20px auto;;
         background-color: rgb(241, 95, 115);
     }
 
@@ -219,16 +218,15 @@ export default {
     }
 
     table, th, td{
-        margin:30px;
+        margin:auto;
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
-        margin-top: 2%;
-        margin-bottom: 20px;
+        margin:20px auto 20px auto;
         background-color: rgb(255, 255, 255);
     }
 
     .marco{
-        margin-left: 5%;
+        margin:20px auto 40px auto;
         padding: 10px;
         border: 2px solid black;
         border-radius: 5%;
@@ -238,7 +236,12 @@ export default {
     }
 
     .divBtns{
-        margin-top: 20px;
-        margin-bottom: 10px;
+        margin:20px auto 20px auto;
+    }
+
+    span{
+        font: 15px;
+        font-weight: bold;
+        color: rgb(48, 47, 47);
     }
 </style>

@@ -2,6 +2,16 @@
     <div class="divInfo">
         <h1>Comprobantes</h1>
         <button @click="desplegarABMComprobantes('Crear')">Crear comprobante</button>
+
+        <div class="divFiltros" v-show="!accion">
+            <h4>FILTROS</h4>
+            <select name="tipoDeOperacion" v-model="busqueda">
+                <option value="">Todos</option>
+                <option value="compra">Compras</option>
+                <option value="venta">Ventas</option>
+            </select>
+        </div>
+
         <ABMcomprobantes
             v-if="abrirABMcomprobante == true"
             :accion=accion
@@ -20,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(comprobante, index) in comprobantesCabeza" :key="index">
+                <tr v-for="(comprobante, index) in filtroNumeroComprobante" :key="index">
                     <td>{{comprobante.id}}</td>
                     <td>{{comprobante.codigoComprobante}}</td>
                     <td>{{comprobante.tipoOperacion}}</td>
@@ -51,6 +61,7 @@ export default {
             comprobantesCabeza: [],
             accion: "",
             id: 0,
+            busqueda: "",
 
         }
     },
@@ -81,9 +92,16 @@ export default {
         MostrarABMComprobantes(ver){
             this.abrirABMcomprobante = ver
             this.traerComprobantesCabeza();
+            this.accion="";
         },
 
         
+    },
+
+    computed:{
+        filtroNumeroComprobante(){
+            return this.comprobantesCabeza.filter((elem)=>elem.tipoOperacion.includes(this.busqueda))
+        },
     },
 
 }
@@ -91,20 +109,31 @@ export default {
 
 <style scoped>
     .divInfo{
-        margin-top: 2%;   
+        min-height: 400px;
         border-style: double;
         width: 60%;
-        margin-left: 20%;
+        margin:20px auto 20px auto;
         background-color: rgb(176, 214, 221);
-        margin-bottom: 25px;
     }
 
     table, th, td{
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
-        margin-top: 2%;
-        margin-left: 19%;
-        margin-bottom: 30px;
+        margin:20px auto 20px auto;
         background-color: rgb(255, 255, 255);
+    }
+
+    .divFiltros{
+        border: 2px black solid;
+        border-radius: 10px;
+        min-height: 60px;
+        width: 600px;
+        margin: 10px auto 10px auto;
+        padding: 10px;
+        background-color:rgb(130, 219, 247);
+    }
+
+    h4{
+        margin: 5px;
     }
 </style>

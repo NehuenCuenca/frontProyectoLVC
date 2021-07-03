@@ -1,9 +1,16 @@
 <template>
     <div class="divInfo"> 
         <h1>Rubros</h1>
-        <button @click="desplegarABMRubro('Crear')">Crear nuevo rubro</button>
-        <br>
-        <br>
+
+        <button @click="desplegarABMRubro('Crear')"
+            style="margin:10px auto 10px auto;">
+            Crear nuevo rubro
+        </button>
+
+        <div class="divFiltros" v-show="!accion">
+            <h4>FILTROS</h4>
+            <input type="text" v-model="busqueda" placeholder="Buscar rubro por nombre">
+        </div>
         <ABMrubros 
             v-if="abrirABMrubro == true"
             @MostrarABMRubros="MostrarABMRubros($event)"
@@ -21,7 +28,7 @@
             </thead>
             
             <tbody>
-                <tr v-for="(rubro, index) in rubros" :key="index">
+                <tr v-for="(rubro, index) in filtroNombreRubro" :key="index">
                     <td>{{ rubro.id }}</td>
                     <td>{{ rubro.titulo }}</td>
 
@@ -65,6 +72,7 @@
                 abrirABMrubro: false,
                 accion: "",
                 id: 0,
+                busqueda:"",
             }
         },
 
@@ -86,8 +94,15 @@
             MostrarABMRubros(ver){
                 this.abrirABMrubro = ver
                 this.traerDatos();
+                this.accion = "";
             },
 
+        },
+
+        computed:{
+            filtroNombreRubro(){
+                return this.rubros.filter((elem)=>elem.titulo.toLowerCase().includes(this.busqueda.trim().toLowerCase()))
+            },
         },
 
     }
@@ -96,22 +111,32 @@
 <style scoped>
 
     .divInfo{
-        
-        margin-top: 2%;     
+        min-height: 400px;   
         border-style: double;
         width: 60%;
-        margin-left: 20%;
+        margin:20px 20% 20px 20%;
         background-color: rgb(186, 190, 247);
-        margin-bottom: 25px;
     }
 
     table, th, td{
-        margin-top: 2%;
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
-        margin-left: 27%;
-        margin-bottom: 30px;
+        margin:30px auto 20px auto;
         background-color: rgb(255, 255, 255);
+    }
+    
+    .divFiltros{
+        border: 2px black solid;
+        border-radius: 10px;
+        min-height: 60px;
+        width: 600px;
+        margin: 10px auto 10px auto;
+        padding: 10px;
+        background-color:thistle;
+    }
+    
+    h4{
+        margin: 5px;
     }
 
 </style>

@@ -2,11 +2,11 @@
     <div>
         <div class="formAgregar" v-if="accion=='Crear' || accion=='Editar'">
             <form  v-on:submit.prevent >
-                <span>Codigo Comprobante</span>
+                <span>Codigo Comprobante: </span>
                 <input type="text" v-model="datosComprobantes.codigoComprobante" readonly="readonly">
                 <br>
                 <br>
-                <span>Tipo Operacion </span>
+                <span>Tipo Operacion: </span>
                 <select name="tipoDeOperacion" 
                     v-model="datosComprobantes.tipoOperacion">
                     <option value="1">Compra</option>
@@ -14,13 +14,13 @@
                 </select>
                 <br>    
                 <br>
-                <span>Fecha de realizado</span>
+                <span>Fecha de realizado: </span>
                 <input type="date" v-model="datosComprobantes.fecha" >
                 <br>
                 <br>
                 <div v-for="(articulo, $id) in datosComprobantes.datosPedidos" 
                         :key="$id">
-                    <span>Articulo {{ $id+1 }}</span>
+                    <span>Articulo {{ $id+1 }}: </span>
                     <select name="datosComprobantes.datosPedidos" v-model="datosComprobantes.datosPedidos[$id].id_art">
                         <option v-for="(articulo, $id_art) in articulos" 
                             :key="$id_art"
@@ -30,7 +30,7 @@
                     </select>             
                     <br>   
                     <br>
-                    <span>Cantidad Articulo {{ $id+1 }}</span>
+                    <span>Cantidad Articulo {{ $id+1 }}: </span>
                     <input type="number" name="datosComprobantes.datosPedidos"
                         v-model="datosComprobantes.datosPedidos[$id].cantidad_art" min="20" max="80">   
                         <br>
@@ -217,20 +217,17 @@ export default {
 <style scoped>
     .formAgregar{
         padding: 10px;
-        margin-top: 20px;
         text-align: center;
-        margin-left: 27%;
+        margin:20px auto 20px auto;
         border: 2px solid black;
         border-radius: 5%;
-        background-color: rgb(175, 228, 238);
-        margin-bottom: 30px;
+        background-color: rgb(151, 216, 229);
         min-height: 40%;
         width: 45%;
     }
 
     .marco{
-        margin-top: 10px;
-        margin-left: 15%;
+        margin:20px auto 20px auto;
         padding: 10px;
         border: 2px solid black;
         border-radius: 5%;
@@ -242,9 +239,7 @@ export default {
     table, th, td{
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
-        margin-top: 2%;
-        margin-left: 2%;
-        margin-bottom: 30px;
+        margin: 15px auto 15px auto;
         background-color: rgb(255, 255, 255);
     }
 
@@ -254,7 +249,7 @@ export default {
         border: 2px solid black;
         border-radius: 5%;
         background-color: rgb(241, 95, 115);
-        margin-left: 15%;
+        margin:10px auto 10px auto;
     }
 
     .pBorrar{
@@ -264,7 +259,13 @@ export default {
     }
 
     .divBtns{
-        margin-top: 20px;
-        margin-bottom: 10px;
+        margin: 10px auto 10px auto;
     }
+
+    span{
+        font: 10px;
+        font-weight: bold;
+        color: rgb(58, 57, 57);
+    }
+
 </style>

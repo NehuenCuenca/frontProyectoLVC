@@ -3,7 +3,7 @@
         <div class="formABM" v-if="(accion == 'Crear') || (accion =='Editar')">
             <h4>{{ accion }} rubro</h4>
             <form @submit.prevent>
-                <span>Nombre:</span>
+                <span>Nombre: </span>
                 <input type="text" placeholder="Nombre rubro..." v-model="datosRubros.titulo">
                 <br>
                 <br>
@@ -107,6 +107,7 @@ export default {
         },
 
     },
+
 }
 </script>
 
@@ -117,16 +118,16 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-left: 28%;
+        margin:15px auto 20px auto;;
         border: 2px solid black;
         border-radius: 5%;
-        background-color: rgb(223, 226, 193);
-        margin-bottom: 30px;
+        background-color: rgb(171, 176, 253);
         min-height: 140px;
         width: 45%;
     }
     
     .divBorrar{
+        margin:5px auto 20px auto;
         height: 80px;
         width: 62%;
         border: 2px solid black;
@@ -141,11 +142,10 @@ export default {
     }
 
     table, th, td{
-        margin-top: 2%;
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
-        margin-bottom: 30px;
         background-color: rgb(255, 255, 255);
+        margin:20px auto 20px auto;
     }
 
     .marco{
@@ -153,8 +153,7 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-left: 20%; 
-        margin-bottom: 5%;
+        margin:10px auto 20px auto;
         padding: 10px;
         border: 2px solid black;
         border-radius: 5%;
@@ -164,7 +163,13 @@ export default {
     }
 
     .divBtns{
-        margin-top: 20px;
-        margin-bottom: 10px;
+        margin:10px auto 10px auto;
     }
+
+    span{
+        font: 15px;
+        font-weight: bold;
+        color: rgb(48, 47, 47);
+    }
+
 </style>

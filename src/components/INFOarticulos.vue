@@ -1,7 +1,19 @@
 <template>
     <div class="divInfo">
         <h1>Articulos</h1>
-        <button @click="desplegarABMArticulo('Crear')">Crear nuevo articulo</button>
+
+        <button @click="desplegarABMArticulo('Crear')"
+                style="margin:10px auto 10px auto;">
+                    Crear nuevo articulo
+        </button>
+
+        <div class="divFiltros" v-show="!accion">
+            <h4>FILTROS</h4>
+            <input type="text" v-model="busqueda" placeholder="Buscar articulo por nombre">
+        </div>
+
+        
+        
         <br>
         <br>
         <ABMarticuloss 
@@ -15,17 +27,18 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre_articulo</th>
+                    <th>Articulo</th>
                     <th>Rubro</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             
             <tbody>
-                <tr v-for="(articulo, id) in articulos" :key="id">
+                <tr v-for="(articulo, id) in filtroNombreArticulo" 
+                        :key="id">
                     <td>{{ articulo.id }}</td>
                     <td>{{ articulo.nombre }}</td>
-                    <td>[{{articulo.rubro_id}}] | {{ articulo.nombre_rubro }} </td>
+                    <td>{{ articulo.nombre_rubro }} [{{articulo.rubro_id}}] </td>
 
                     <td>
                         <input type="button" value="Editar"
@@ -65,7 +78,8 @@
                 articulos: [],
                 abrirABMarticulo: false,
                 accion: "",
-                id: 4,
+                id: 0,
+                busqueda:"",
             }
         },
 
@@ -87,31 +101,48 @@
             MostrarABMArticulos(ver){
                 this.abrirABMarticulo = ver
                 this.traerArticulos();
+                this.accion= "";
             }
             
-        }
+        },
+
+        computed:{
+            filtroNombreArticulo(){
+                return this.articulos.filter((elem)=>elem.nombre.toLowerCase().includes(this.busqueda.trim().toLowerCase()))
+            },
+        },
     }
 </script>
 
 <style scoped>
     .divInfo{
-        
-        margin-top: 2%;   
+        min-height: 400px;
         border-style: double;
         width: 60%;
-        margin-left: 20%;
+        margin:20px auto 20px auto;
         background-color: rgb(229, 235, 162);
-        margin-bottom: 25px;
     }
 
     table, th, td{
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
         margin-top: 2%;
-        margin-left: 15%;
-        margin-bottom: 30px;
+        margin:10px auto 10px auto;
         background-color: rgb(255, 255, 255);
     }
-
     
+    .divFiltros{
+        border: 2px black solid;
+        border-radius: 10px;
+        min-height: 60px;
+        width: 600px;
+        margin: 10px auto 0px auto;
+        padding: 10px;
+        background-color:rgb(243, 214, 159);
+
+    }
+    
+    h4{
+        margin: 5px;
+    }
 </style>
