@@ -4,27 +4,27 @@
             <h3>{{ accion }} articulo</h3>
             <form @submit.prevent>
                 <span>Nombre: </span>
-                <input type="text" v-model="datosArticulos.nombre">
+                <input type="text" v-model="datosArticulos.nombre" required>
                 <br>
                 <br>
                 <span>Precio: </span>
-                <input type="text" v-model="datosArticulos.precio">
+                <input type="text" v-model="datosArticulos.precio" required>
                 <br>
                 <br>
                 <span>Fecha Vencimiento: </span>
-                <input type="date" v-model="datosArticulos.fechaVencimiento">
+                <input type="date" v-model="datosArticulos.fechaVencimiento" required>
                 <br>
                 <br>
                 <span>Stock min: </span>
-                <input type="text" v-model="datosArticulos.stockMinimo">
+                <input type="text" v-model="datosArticulos.stockMinimo" required>
                 <br>
                 <br>
                 <span>Stock max: </span>
-                <input type="text" v-model="datosArticulos.stockMaximo">
+                <input type="text" v-model="datosArticulos.stockMaximo" required>
                 <br>
                 <br>
                 <span>Rubro: </span>
-                <select name="rubro_id" v-model="datosArticulos.rubro_id">
+                <select name="rubro_id" v-model="datosArticulos.rubro_id" required>
                     <option v-for="(rubro, $id) in rubros" 
                         :key="$id"
                         :value="rubro.id">
@@ -60,9 +60,9 @@
                         <tr >
                             <td>{{datosArticulos.id}}</td>
                             <td>{{datosArticulos.nombre}}</td>
-                            <td>{{datosArticulos.fechaVencimiento}}</td>
-                            <td>{{datosArticulos.nombre_rubro}} | {{datosArticulos.rubro_id}}</td>
+                            <td>{{datosArticulos.nombre_rubro}} | [{{datosArticulos.rubro_id}}]</td>
                             <td>{{datosArticulos.precio}}</td>
+                            <td>{{datosArticulos.fechaVencimiento}}</td>
                             <td>{{datosArticulos.stockMinimo}}</td>
                             <td>{{datosArticulos.stockMaximo}}</td>
 
@@ -151,7 +151,6 @@ export default {
             }
 
             setTimeout(() => this.$emit("MostrarABMArticulos", false), 300)
-            //this.$emit("MostrarABMArticulos", false)
             this.$emit("traerArticulos");
         },
 

@@ -128,8 +128,8 @@
     .divFiltros{
         border: 2px black solid;
         border-radius: 10px;
-        min-height: 60px;
-        width: 600px;
+        min-height: 50px;
+        width: 50%;
         margin: 10px auto 10px auto;
         padding: 10px;
         background-color:thistle;

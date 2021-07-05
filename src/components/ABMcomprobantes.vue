@@ -8,20 +8,20 @@
                 <br>
                 <span>Tipo Operacion: </span>
                 <select name="tipoDeOperacion" 
-                    v-model="datosComprobantes.tipoOperacion">
+                    v-model="datosComprobantes.tipoOperacion" required>
                     <option value="1">Compra</option>
                     <option value="2">Venta</option>
                 </select>
                 <br>    
                 <br>
                 <span>Fecha de realizado: </span>
-                <input type="date" v-model="datosComprobantes.fecha" >
+                <input type="datetime-local" v-model="datosComprobantes.fecha" required>
                 <br>
                 <br>
                 <div v-for="(articulo, $id) in datosComprobantes.datosPedidos" 
                         :key="$id">
                     <span>Articulo {{ $id+1 }}: </span>
-                    <select name="datosComprobantes.datosPedidos" v-model="datosComprobantes.datosPedidos[$id].id_art">
+                    <select name="datosComprobantes.datosPedidos" v-model="datosComprobantes.datosPedidos[$id].id_art" required>
                         <option v-for="(articulo, $id_art) in articulos" 
                             :key="$id_art"
                             :value="articulo.id">
@@ -32,7 +32,7 @@
                     <br>
                     <span>Cantidad Articulo {{ $id+1 }}: </span>
                     <input type="number" name="datosComprobantes.datosPedidos"
-                        v-model="datosComprobantes.datosPedidos[$id].cantidad_art" min="20" max="80">   
+                        v-model="datosComprobantes.datosPedidos[$id].cantidad_art" min="20" max="80" required>   
                         <br>
                     <br>           
                     <button @click="agregarArticulo()" v-if="!$id">+</button>

@@ -5,11 +5,12 @@
 
         <div class="divFiltros" v-show="!accion">
             <h4>FILTROS</h4>
-            <select name="tipoDeOperacion" v-model="busqueda">
+            <!-- <select name="tipoDeOperacion" v-model="busqueda">
                 <option value="">Todos</option>
                 <option value="compra">Compras</option>
                 <option value="venta">Ventas</option>
-            </select>
+            </select> -->
+            <input type="text" v-model="busqueda" placeholder="Buscar por numero comprobante">
         </div>
 
         <ABMcomprobantes
@@ -100,7 +101,8 @@ export default {
 
     computed:{
         filtroNumeroComprobante(){
-            return this.comprobantesCabeza.filter((elem)=>elem.tipoOperacion.includes(this.busqueda))
+            /* return this.comprobantesCabeza.filter((elem)=>elem.tipoOperacion.includes(this.busqueda)) */
+            return this.comprobantesCabeza.filter((elem)=> elem.codigoComprobante>=this.busqueda)
         },
     },
 
@@ -126,9 +128,9 @@ export default {
     .divFiltros{
         border: 2px black solid;
         border-radius: 10px;
-        min-height: 60px;
-        width: 600px;
-        margin: 10px auto 10px auto;
+        min-height: 50px;
+        width: 50%;
+        margin: 20px auto 30px auto;
         padding: 10px;
         background-color:rgb(130, 219, 247);
     }

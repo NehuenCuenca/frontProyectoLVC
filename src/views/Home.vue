@@ -74,6 +74,7 @@ export default {
 
   .titulo{
     margin: -40px auto 40px auto;
+    
   }
 
   .divBtnInfos{

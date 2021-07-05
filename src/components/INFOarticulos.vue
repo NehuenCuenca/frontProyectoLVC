@@ -9,7 +9,7 @@
 
         <div class="divFiltros" v-show="!accion">
             <h4>FILTROS</h4>
-            <input type="text" v-model="busqueda" placeholder="Buscar articulo por nombre">
+            <input type="text" v-model="busqueda" placeholder="Buscar articulo por RUBRO">
         </div>
 
         
@@ -108,7 +108,7 @@
 
         computed:{
             filtroNombreArticulo(){
-                return this.articulos.filter((elem)=>elem.nombre.toLowerCase().includes(this.busqueda.trim().toLowerCase()))
+                return this.articulos.filter((elem)=>elem.nombre_rubro.toLowerCase().includes(this.busqueda.trim().toLowerCase()))
             },
         },
     }
@@ -126,7 +126,6 @@
     table, th, td{
         border: 2px solid rgb(116, 113, 113);
         border-collapse: collapse;
-        margin-top: 2%;
         margin:10px auto 10px auto;
         background-color: rgb(255, 255, 255);
     }
@@ -134,9 +133,9 @@
     .divFiltros{
         border: 2px black solid;
         border-radius: 10px;
-        min-height: 60px;
-        width: 600px;
-        margin: 10px auto 0px auto;
+        min-height: 50px;
+        width: 50%;
+        margin: 20px auto -20px auto;
         padding: 10px;
         background-color:rgb(243, 214, 159);
 
