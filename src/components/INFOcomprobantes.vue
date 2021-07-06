@@ -11,6 +11,14 @@
                 <option value="venta">Ventas</option>
             </select> -->
             <input type="text" v-model="busqueda" placeholder="Buscar por numero comprobante">
+            <br>
+            <br>
+            <span>Filtrar entre 2 fechas</span>
+            <br>
+            <input type="date" v-model="fecha1" class="inpFecha">
+            <input type="date" v-model="fecha2" class="inpFecha">
+            <br>
+            <button @click="limpiarCampos()">Limpiar fechas</button>
         </div>
 
         <ABMcomprobantes
@@ -31,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(comprobante, index) in filtroNumeroComprobante" :key="index">
+                <tr v-for="(comprobante, index) in filtroFecha" :key="index">
                     <td>{{comprobante.id}}</td>
                     <td>{{comprobante.codigoComprobante}}</td>
                     <td>{{comprobante.tipoOperacion}}</td>
@@ -63,6 +71,8 @@ export default {
             accion: "",
             id: 0,
             busqueda: "",
+            fecha1:"",
+            fecha2:"",
 
         }
     },
@@ -70,6 +80,7 @@ export default {
     created(){
       this.traerComprobantesCabeza(); 
     },
+
 
     components: {
         ABMcomprobantes,
@@ -96,14 +107,31 @@ export default {
             this.accion="";
         },
 
+        limpiarCampos(){
+            if(this.fecha1!="" && this.fecha2!=""){
+                this.busqueda=""
+                this.fecha1=""
+                this.fecha2=""
+            } else {
+                return
+            }
+        },
+
         
     },
 
     computed:{
         filtroNumeroComprobante(){
-            /* return this.comprobantesCabeza.filter((elem)=>elem.tipoOperacion.includes(this.busqueda)) */
             return this.comprobantesCabeza.filter((elem)=> elem.codigoComprobante>=this.busqueda)
         },
+
+        filtroFecha(){
+            if(this.fecha1=="" && this.fecha2==""){
+                return this.comprobantesCabeza
+            }else{
+                return this.comprobantesCabeza.filter((elem)=> elem.fecha>=this.fecha1 && elem.fecha<=this.fecha2)
+            }
+        }
     },
 
 }
@@ -137,5 +165,15 @@ export default {
 
     h4{
         margin: 5px;
+    }
+
+    .inpFecha{
+        margin: 5px auto 5px auto;
+    }
+
+    span{
+        font: 10px;
+        font-weight: bold;
+        color: rgb(58, 57, 57);
     }
 </style>

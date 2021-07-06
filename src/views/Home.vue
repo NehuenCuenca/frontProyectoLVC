@@ -10,6 +10,7 @@
       <INFOarticulos v-if="abrirArticulosABM == true"></INFOarticulos>
       <INFOrubros v-if="abrirRubrosABM == true"></INFOrubros>
       <INFOcomprobantes v-if="abrirComprobantesABM == true"/>
+      <INFOinventario v-if="!abrirArticulosABM && !abrirRubrosABM && !abrirComprobantesABM"/>
     </div>
     
   </div>
@@ -20,6 +21,7 @@
 import INFOarticulos from "../components/INFOarticulos.vue";
 import INFOrubros from "../components/INFOrubros.vue";
 import INFOcomprobantes from "../components/INFOcomprobantes.vue";
+import INFOinventario from "../components/INFOinventario.vue";
 
 export default {
   
@@ -29,6 +31,7 @@ export default {
     INFOarticulos,
     INFOrubros,
     INFOcomprobantes,
+    INFOinventario,
   },
 
   data() {

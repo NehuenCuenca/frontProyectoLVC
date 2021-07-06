@@ -108,7 +108,11 @@
 
         computed:{
             filtroNombreArticulo(){
-                return this.articulos.filter((elem)=>elem.nombre_rubro.toLowerCase().includes(this.busqueda.trim().toLowerCase()))
+                if(this.busqueda==""){
+                    return this.articulos
+                }else {
+                    return this.articulos.filter((elem)=>elem.nombre_rubro.toLowerCase().includes(this.busqueda.trim().toLowerCase()))
+                }
             },
         },
     }
