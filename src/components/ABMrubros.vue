@@ -17,7 +17,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre_rubro</th>
+                        <th>NOMBRE RUBRO</th>
                     </tr>
                 </thead>
                 

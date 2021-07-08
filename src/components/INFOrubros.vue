@@ -2,7 +2,7 @@
     <div class="divInfo"> 
         <h1>Rubros</h1>
 
-        <button @click="desplegarABMRubro('Crear')"
+        <button @click="desplegarABMRubro('Crear')" v-if="!accion"
             style="margin:10px auto 10px auto;">
             Crear nuevo rubro
         </button>
@@ -22,8 +22,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre_rubro</th>
-                    <th>Acciones</th>
+                    <th>NOMBRE RUBRO</th>
+                    <th>ACCIONES</th>
                 </tr>
             </thead>
             

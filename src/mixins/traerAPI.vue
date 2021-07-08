@@ -11,9 +11,18 @@ export default {
                 },
                 //body: JSON.stringify(parametros)
             })
-                .then(datos => datos.json())
+                .then(function(datos) {
+                    //console.log(datos.status);
+                    if (!datos.ok) {
+                        alert("Ruta no encontrada. Error tipo: " + datos.status);
+                        return false
+                    }
+                    return datos.json();
+                })
+                //.then(datos => datos.json())
                 .then(datos => {
                     let apiDatos = datos
+                    
                     console.log(apiDatos)
                     return apiDatos
                 })

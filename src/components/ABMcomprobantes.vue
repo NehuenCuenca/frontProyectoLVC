@@ -56,11 +56,11 @@
                 <table>
                     <thead>
                         <th>ID</th>
-                        <th>Codigo Comprobante</th>
-                        <th>Fecha realizado</th>
-                        <th>Operacion</th>
-                        <th>Articulo</th>
-                        <th>Cantidad</th>
+                        <th>CODIGO COMPROBANTE</th>
+                        <th>FECHA REALIZADO</th>
+                        <th>OPERACION</th>
+                        <th>ARTICULO</th>
+                        <th>CANTIDAD</th>
                     </thead>
                     <tbody>
                         <tr v-for="(renglon, indice) in comprobantesRenglon" :key="indice">

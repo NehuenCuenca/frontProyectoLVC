@@ -48,12 +48,12 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nombre_articulo</th>
-                            <th>Rubro</th>
-                            <th>Precio</th>
-                            <th>FechaVencimiento</th>
-                            <th>S_Minimo</th>
-                            <th>S_Maximo</th>
+                            <th>NOMBRE ARTICULO</th>
+                            <th>RUBRO</th>
+                            <th>PRECIO</th>
+                            <th>FECHA VENCIMIENTO</th>
+                            <th>STOCK MIN</th>
+                            <th>STOCK MAX</th>
                         </tr>
                     </thead>
                     <tbody>

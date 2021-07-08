@@ -3,17 +3,16 @@
         <h1>Articulos</h1>
 
         <button @click="desplegarABMArticulo('Crear')"
-                style="margin:10px auto 10px auto;">
+                style="margin:10px auto 10px auto;"
+                v-if="!accion">
                     Crear nuevo articulo
         </button>
 
         <div class="divFiltros" v-show="!accion">
             <h4>FILTROS</h4>
-            <input type="text" v-model="busqueda" placeholder="Buscar articulo por RUBRO">
+            <input type="text" v-model="busqueda" placeholder="Buscar art. por nombre rubro">
         </div>
 
-        
-        
         <br>
         <br>
         <ABMarticuloss 
@@ -27,9 +26,9 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Articulo</th>
-                    <th>Rubro</th>
-                    <th>Acciones</th>
+                    <th>ARTICULO</th>
+                    <th>RUBRO</th>
+                    <th>ACCIONES</th>
                 </tr>
             </thead>
             

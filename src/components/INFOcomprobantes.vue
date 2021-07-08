@@ -1,7 +1,7 @@
 <template>
     <div class="divInfo">
         <h1>Comprobantes</h1>
-        <button @click="desplegarABMComprobantes('Crear')">Crear comprobante</button>
+        <button @click="desplegarABMComprobantes('Crear')" v-if="!accion">Crear comprobante</button>
 
         <div class="divFiltros" v-show="!accion">
             <h4>FILTROS</h4>
@@ -18,7 +18,7 @@
             <input type="date" v-model="fecha1" class="inpFecha">
             <input type="date" v-model="fecha2" class="inpFecha">
             <br>
-            <button @click="limpiarCampos()">Limpiar fechas</button>
+            <button @click="limpiarCampos()">Limpiar filtros</button>
         </div>
 
         <ABMcomprobantes
@@ -32,14 +32,14 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Codigo comprobante</th>
-                    <th>Compra/Venta</th>
-                    <th>Fecha realizada</th>
-                    <th>Acciones</th>
+                    <th>CODIGO COMPROBANTE</th>
+                    <th>COMPRA/VENTA</th>
+                    <th>FECHA REALIZADO</th>
+                    <th>ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(comprobante, index) in filtroFecha" :key="index">
+                <tr v-for="(comprobante, index) in filtroFechaCodigoComprobante" :key="index">
                     <td>{{comprobante.id}}</td>
                     <td>{{comprobante.codigoComprobante}}</td>
                     <td>{{comprobante.tipoOperacion}}</td>
@@ -108,7 +108,7 @@ export default {
         },
 
         limpiarCampos(){
-            if(this.fecha1!="" && this.fecha2!=""){
+            if(this.fecha1!="" || this.fecha2!="" || this.busqueda!=""){
                 this.busqueda=""
                 this.fecha1=""
                 this.fecha2=""
@@ -121,16 +121,19 @@ export default {
     },
 
     computed:{
-        filtroNumeroComprobante(){
-            return this.comprobantesCabeza.filter((elem)=> elem.codigoComprobante>=this.busqueda)
-        },
+        /* filtroNumeroComprobante(){
+            return this.comprobantesCabeza.filter((elem)=> elem.id>=this.busqueda)
+        }, */
 
-        filtroFecha(){
-            if(this.fecha1=="" && this.fecha2==""){
+        filtroFechaCodigoComprobante(){
+            if((this.fecha1=="" || this.fecha2=="") && this.busqueda==""){
                 return this.comprobantesCabeza
-            }else{
-                return this.comprobantesCabeza.filter((elem)=> elem.fecha>=this.fecha1 && elem.fecha<=this.fecha2)
+            } else if(this.fecha1=="" && this.fecha2==""){
+                return this.comprobantesCabeza.filter((elem)=> elem.codigoComprobante>=this.busqueda)
+            } else {
+                return this.comprobantesCabeza.filter((elem)=> (elem.fecha>=this.fecha1 && elem.fecha<=this.fecha2) && (elem.codigoComprobante>=this.busqueda))
             }
+
         }
     },
 
