@@ -1,16 +1,20 @@
 <template>
   <div class="home">
-    <h1 class="titulo">TradeMark S.A</h1>
     <div class="divBtnInfos">
-      <button @click="desplegarArticulosABM()" class="btnAbrirABM">Articulos ABM</button>
-      <button @click="desplegarRubrosABM()" class="btnAbrirABM">Rubros ABM</button>
-      <button @click="desplegarComprobantesABM()" class="btnAbrirABM">Comprobantes ABM</button>
+      <button @click="desplegarInventario()" class="btnAbrirINFO">Inventario</button>
+      <button @click="desplegarComprobantesINFO()" class="btnAbrirINFO">Comprobantes INFO</button>
+      <button @click="desplegarArticulosINFO()" class="btnAbrirINFO">Articulos INFO</button>
+      <button @click="desplegarRubrosINFO()" class="btnAbrirINFO">Rubros INFO</button>
     </div>
-    <div class="ABMestilo">
-      <INFOarticulos v-if="abrirArticulosABM == true"></INFOarticulos>
-      <INFOrubros v-if="abrirRubrosABM == true"></INFOrubros>
-      <INFOcomprobantes v-if="abrirComprobantesABM == true"/>
-      <INFOinventario v-if="!abrirArticulosABM && !abrirRubrosABM && !abrirComprobantesABM"/>
+    <div class="INFOestilo">
+      <INFOarticulos v-if="abrirArticulosINFO == true"/>
+      <INFOrubros v-if="abrirRubrosINFO == true"/>
+      <INFOcomprobantes v-if="abrirComprobantesINFO == true"/>
+      <INFOinventario v-if="abrirInventario == true"/>
+      <div>
+        <img src="../assets/logo.png" class="logo" width="550px"
+            height="230px" @click="refrescarPagina()" title="Refrescar la pagina">
+      </div>
     </div>
     
   </div>
@@ -36,29 +40,44 @@ export default {
 
   data() {
     return {
-      abrirArticulosABM: false,
-      abrirRubrosABM: false,
-      abrirComprobantesABM: false,
+      abrirArticulosINFO: false,
+      abrirRubrosINFO: false,
+      abrirComprobantesINFO: false,
+      abrirInventario: true,
     }
   },
 
   methods:{
-    desplegarArticulosABM(){
-      this.abrirArticulosABM= !this.abrirArticulosABM;
-      this.abrirRubrosABM= false;
-      this.abrirComprobantesABM= false;
+    desplegarArticulosINFO(){
+      this.abrirArticulosINFO= !this.abrirArticulosINFO;
+      this.abrirRubrosINFO= false;
+      this.abrirComprobantesINFO= false;
+      this.abrirInventario= false;
     },
     
-    desplegarRubrosABM(){
-      this.abrirRubrosABM= !this.abrirRubrosABM;
-      this.abrirArticulosABM= false;
-      this.abrirComprobantesABM= false;
+    desplegarRubrosINFO(){
+      this.abrirRubrosINFO= !this.abrirRubrosINFO;
+      this.abrirArticulosINFO= false;
+      this.abrirComprobantesINFO= false;
+      this.abrirInventario= false;
     },
 
-    desplegarComprobantesABM(){
-      this.abrirComprobantesABM= !this.abrirComprobantesABM;
-      this.abrirArticulosABM= false;
-      this.abrirRubrosABM= false;
+    desplegarComprobantesINFO(){
+      this.abrirComprobantesINFO= !this.abrirComprobantesINFO;
+      this.abrirArticulosINFO= false;
+      this.abrirRubrosINFO= false;
+      this.abrirInventario= false;
+    },
+
+    desplegarInventario(){
+      this.abrirInventario= !this.abrirInventario;
+      this.abrirArticulosINFO= false;
+      this.abrirRubrosINFO= false;
+      this.abrirComprobantesINFO= false;
+    },
+
+    refrescarPagina(){
+      window.location.reload();
     }
 
   },
@@ -67,35 +86,35 @@ export default {
 </script>
 
 <style scoped>
+  .home{
+    margin: 50px auto 10px auto;
+  }
 
+  .logo{ 
+    margin: 60px auto 10px auto ;
+    cursor: pointer;
+  }
 
-  .btnAbrirABM{
+  .btnAbrirINFO{
     text-align: center;
     height: 40px;
     width: 80px;
   }
 
-  .titulo{
-    margin: -40px auto 40px auto;
-    
-  }
-
-  .divBtnInfos{
+   .divBtnInfos{
     display: flex;
     align-content: space-between;
     background-color: rgb(250, 214, 114);
     padding: 10px;
     border: 2px solid black;
     justify-content: center;
-    
-  }
+  } 
 
   .divBtnInfos button {
     background-color: rgb(247, 238, 238);
     height: 60px;
     min-width: 160px;
     margin: 10px 10px 10px 10px;
-    text-align: center;
     border: 2px solid black;
     border-radius: 10%;
     cursor: pointer;
@@ -103,7 +122,7 @@ export default {
     font-weight: bolder;
   }  
 
-  .ABMestilo{
+  .INFOestilo{
     display: flex;
     flex-direction: column;
     justify-content: center;

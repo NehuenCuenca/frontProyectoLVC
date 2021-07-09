@@ -3,8 +3,17 @@
         <h2>Inventario/Stock</h2>
         <div class="divFiltros">
             <h4>FILTROS</h4>
-            <span>Numero rubro: </span>
-            <input type="number" v-model="numRubro" title="Ingrese 0 para filtrar todos los rubros " min="0">
+            <!-- <span>Numero rubro: </span>
+            <input type="number" v-model="numRubro" title="Ingrese 0 para filtrar todos los rubros " min="0"> -->
+            <span>Rubro: </span>
+                <select name="rubro_id" v-model="numRubro" required>
+                    <option value="0">0| Todos</option>
+                    <option v-for="(rubro, $id) in rubros" 
+                        :key="$id"
+                        :value="rubro.id">
+                            {{rubro.id}}| {{rubro.titulo}}
+                    </option>
+                </select>
             <br>
             <br>
             <span>Fecha: </span>
@@ -27,7 +36,7 @@
                 <tr v-for="(registro, id) in inventario" :key="id">
                     <td>{{registro.id}}</td>
                     <td>{{registro.nombre}}</td>
-                    <td>{{registro.rubro_id}}</td>
+                    <td>{{registro.titulo}}</td>
                     <td>{{registro.stock}}</td>
                 </tr>
             </tbody>
@@ -45,6 +54,7 @@ export default {
     created(){
         this.armarFecha();
         this.traerStock(0,this.fechaParametro);
+        this.traerRubros();
     },
 
     data(){
@@ -52,6 +62,7 @@ export default {
             inventario:[],
             numRubro: 0,
             fechaParametro:"",
+            rubros:[],
         }
     },
 
@@ -68,7 +79,13 @@ export default {
                         }
                         this.inventario = datos
                     })
-                    
+        },
+
+        traerRubros(){
+            this.traerDatosAPI("rubros")
+                .then(datos => {
+                        this.rubros = datos
+                    })
         },
 
         armarFecha(){
