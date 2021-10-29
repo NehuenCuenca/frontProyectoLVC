@@ -4,25 +4,30 @@
             <h3>{{ accion }} articulo</h3>
             <form @submit.prevent>
                 <span>Nombre: </span>
-                <input type="text" v-model="datosArticulos.nombre" required>
-                <br>
-                <br>
+                <input type="text" v-model="datosArticulos.nombre" 
+                        required autofocus>
+                <br><br>
+
                 <span>Precio: </span>
-                <input type="text" v-model="datosArticulos.precio" required>
-                <br>
-                <br>
+                <input type="number" v-model="datosArticulos.precio" 
+                        required min="10">
+                <br><br>
+
                 <span>Fecha Vencimiento: </span>
-                <input type="date" v-model="datosArticulos.fechaVencimiento" required>
-                <br>
-                <br>
+                <input type="date" v-model="datosArticulos.fechaVencimiento" 
+                        required>
+                <br><br>
+
                 <span>Stock min: </span>
-                <input type="text" v-model="datosArticulos.stockMinimo" required>
-                <br>
-                <br>
+                <input type="number" v-model="datosArticulos.stockMinimo" 
+                        required min="10" max="40">
+                <br><br>
+                
                 <span>Stock max: </span>
-                <input type="text" v-model="datosArticulos.stockMaximo" required>
-                <br>
-                <br>
+                <input type="number" v-model="datosArticulos.stockMaximo" 
+                        required min="41" max="900">
+                <br><br>
+
                 <span>Rubro: </span>
                 <select name="rubro_id" v-model="datosArticulos.rubro_id" required>
                     <option v-for="(rubro, $id) in rubros" 
@@ -31,9 +36,8 @@
                             {{rubro.id}}| {{rubro.titulo}}
                     </option>
                 </select>
-                <br>
-                <br>
-                <hr>
+                <br><br><hr>
+
                 <div class="divBtns">
                     <button @click="btnCancelar()">Cancelar</button> | 
                     <button @click="guardarArticulo()">Enviar</button>
@@ -44,6 +48,7 @@
         
         <div v-if="(accion == 'Borrar') || (accion =='Consultar')" class="marco">
             <div>
+                <h3>Articulo seleccionado</h3>
                 <table>
                     <thead>
                         <tr>
@@ -61,7 +66,7 @@
                             <td>{{datosArticulos.id}}</td>
                             <td>{{datosArticulos.nombre}}</td>
                             <td>{{datosArticulos.nombre_rubro}} | [{{datosArticulos.rubro_id}}]</td>
-                            <td>{{datosArticulos.precio}}</td>
+                            <td>${{datosArticulos.precio}}</td>
                             <td>{{datosArticulos.fechaVencimiento}}</td>
                             <td>{{datosArticulos.stockMinimo}}</td>
                             <td>{{datosArticulos.stockMaximo}}</td>
@@ -129,7 +134,7 @@ export default {
                     alert("Rellene los campos vacios o revise que los datos que esta ingresando sean COHERENTES")
                     return
                 }else {
-                     this.enviarDatosAPI("articulos", this.datosArticulos)
+                    this.enviarDatosAPI("articulos", this.datosArticulos)
                         .then(datos => {
                             this.datosArticulos = datos
                     })  
@@ -177,8 +182,8 @@ export default {
         traerRubros(){
             this.traerDatosAPI("rubros")
                 .then(datos => {
-                        this.rubros = datos
-                    })
+                    this.rubros = datos
+                })
         },
 
     },
@@ -188,6 +193,7 @@ export default {
 
 
 <style scoped>
+
     .formAgregar{
         display: flex;
         flex-direction: column;

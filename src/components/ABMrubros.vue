@@ -4,7 +4,8 @@
             <h4>{{ accion }} rubro</h4>
             <form @submit.prevent>
                 <span>Nombre: </span>
-                <input type="text" placeholder="Nombre rubro..." v-model="datosRubros.titulo">
+                <input type="text" placeholder="Nombre rubro..." 
+                        v-model="datosRubros.titulo" autofocus>
                 <br>
                 <br>
                 <button @click="cancelarForm()">Cancelar</button>

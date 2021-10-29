@@ -17,6 +17,11 @@
       </div>
     </div>
     
+    <!-- <div>
+      <router-link to="/articulos">
+          info articulos
+      </router-link>
+    </div> -->
   </div>
 </template>
 

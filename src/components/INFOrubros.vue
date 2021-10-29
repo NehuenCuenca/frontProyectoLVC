@@ -9,7 +9,8 @@
 
         <div class="divFiltros" v-show="!accion">
             <h4>FILTROS</h4>
-            <input type="text" v-model="busqueda" placeholder="Buscar rubro por nombre">
+            <input type="text" v-model="busqueda" 
+                    placeholder="Buscar rubro por nombre" >
         </div>
         <ABMrubros 
             v-if="abrirABMrubro == true"
@@ -88,6 +89,7 @@
             desplegarABMRubro(accion, id=0){
                 this.accion= accion;
                 this.id= id;
+                window.scrollTo(0, 0);
                 this.abrirABMrubro = !this.abrirABMrubro;
             },
 

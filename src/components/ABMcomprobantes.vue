@@ -3,77 +3,92 @@
         <div class="formAgregar" v-if="accion=='Crear' || accion=='Editar'">
             <form  v-on:submit.prevent >
                 <span>Codigo Comprobante: </span>
-                <input type="text" v-model="datosComprobantes.codigoComprobante" readonly="readonly">
-                <br>
-                <br>
+                <input type="text" :value="codigoComprobante"
+                         readonly="readonly">
+                <br><br>
+
                 <span>Tipo Operacion: </span>
                 <select name="tipoDeOperacion" 
                     v-model="datosComprobantes.tipoOperacion" required>
                     <option value="1">Compra</option>
                     <option value="2">Venta</option>
                 </select>
-                <br>    
-                <br>
+                <br><br>
+
                 <span>Fecha de realizado: </span>
-                <input type="datetime-local" v-model="datosComprobantes.fecha" required>
-                <br>
-                <br>
+                <input type="datetime-local" v-model="datosComprobantes.fecha" 
+                        required>
+                <br><br><br>
+
                 <div v-for="(articulo, $id) in datosComprobantes.datosPedidos" 
                         :key="$id">
                     <span>Articulo {{ $id+1 }}: </span>
-                    <select name="datosComprobantes.datosPedidos" v-model="datosComprobantes.datosPedidos[$id].id_art" required>
+                    <select name="datosComprobantes.datosPedidos" 
+                            v-model="datosComprobantes.datosPedidos[$id].id_art" 
+                            required>
                         <option v-for="(articulo, $id_art) in articulos" 
                             :key="$id_art"
                             :value="articulo.id">
                                 {{articulo.id}} | {{articulo.nombre}}
                         </option>
                     </select>             
-                    <br>   
-                    <br>
+                    <br><br>
+
                     <span>Cantidad Articulo {{ $id+1 }}: </span>
                     <input type="number" name="datosComprobantes.datosPedidos"
-                        v-model="datosComprobantes.datosPedidos[$id].cantidad_art" min="20" max="80" required>   
-                        <br>
-                    <br>           
+                            v-model="datosComprobantes.datosPedidos[$id].cantidad_art" 
+                            min="20" max="80" required>   
+                        <br><br>  
+
                     <button @click="agregarArticulo()" v-if="!$id">+</button>
-                    <br>
-                    <br> 
+                    <br><br> 
                 </div>
+
                 <hr>
+
                 <div class="divBtns">
                     <button @click="btnCancelar()">Cancelar</button> | 
                     <input type="submit" value="Guardar Comprobante" 
                         @click="guardarComprobante()">
-                </div>
-                
+                </div>  
             </form>
-
-           
         </div>
 
         <div v-if="(accion=='Consultar') || (accion=='Borrar')">
             <div class="marco">
+                <h3>Comprobante seleccionado</h3>
+                <hr>
+                <h4><u>Encabezado</u></h4>
                 <table>
                     <thead>
                         <th>ID</th>
                         <th>CODIGO COMPROBANTE</th>
                         <th>FECHA REALIZADO</th>
                         <th>OPERACION</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(renglon, indice) in comprobanteCabezaSolo " :key="indice">
+                            <td>{{renglon.id}}</td>
+                            <td>{{renglon.codigoComprobante}}</td>
+                            <td>{{renglon.fecha}}</td>
+                            <td>{{renglon.tipoOperacion}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4><u>Renglones</u></h4>
+                <table>
+                    <thead>
                         <th>ARTICULO</th>
                         <th>CANTIDAD</th>
                     </thead>
                     <tbody>
                         <tr v-for="(renglon, indice) in comprobantesRenglon" :key="indice">
-                            <td>{{renglon.id}}</td>
-                            <td>{{renglon.codigoComprobante}}</td>
-                            <td>{{renglon.fecha}}</td>
-                            <td>{{renglon.tipoOperacion}}</td>
                             <td>{{renglon.nombre_articulo}}</td>
                             <td>{{renglon.cantidad}}</td>
                         </tr>
                     </tbody>
                 </table>
-                
+                <hr>
                 <button v-if="accion=='Consultar'" @click="btnCancelar()">Cerrar</button>
 
                 <div class="divBorrar" v-if="accion == 'Borrar'">
@@ -127,6 +142,16 @@ export default {
 
             articulos: [],
             comprobantesRenglon:[],
+        }
+    },
+
+    computed: {
+        comprobanteCabezaSolo(){
+            return this.comprobantesRenglon.slice(0,1)
+        },
+
+        codigoComprobante(){
+            return this.datosComprobantes.codigoComprobante;
         }
     },
 

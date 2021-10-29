@@ -90,6 +90,7 @@ export default {
         desplegarABMComprobantes(accion, id=0){
             this.accion= accion;
             this.id = id;
+            window.scrollTo(0, 0);
             this.abrirABMcomprobante= !this.abrirABMcomprobante;             
         },
 
@@ -121,10 +122,6 @@ export default {
     },
 
     computed:{
-        /* filtroNumeroComprobante(){
-            return this.comprobantesCabeza.filter((elem)=> elem.id>=this.busqueda)
-        }, */
-
         filtroFechaCodigoComprobante(){
             if((this.fecha1=="" || this.fecha2=="") && this.busqueda==""){
                 return this.comprobantesCabeza
@@ -133,8 +130,8 @@ export default {
             } else {
                 return this.comprobantesCabeza.filter((elem)=> (elem.fecha>=this.fecha1 && elem.fecha<=this.fecha2) && (elem.codigoComprobante>=this.busqueda))
             }
-
-        }
+        },
+        
     },
 
 }

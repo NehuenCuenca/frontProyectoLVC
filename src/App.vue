@@ -16,6 +16,7 @@
 <style>
 body{
   background-color: rgb(206, 200, 200);
+  font-size: 18px;
 }
 
 #app {

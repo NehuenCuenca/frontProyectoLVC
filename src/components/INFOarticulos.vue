@@ -10,7 +10,18 @@
 
         <div class="divFiltros" v-show="!accion">
             <h4>FILTROS</h4>
-            <input type="text" v-model="busqueda" placeholder="Buscar art. por nombre rubro">
+
+            <span>Rubro: </span>
+            <select name="rubro_id" v-model="rubroSeleccionado">
+                <option value="0">Todos los rubros</option>
+                <option v-for="(rubro, $id) in rubros" 
+                    :key="$id"
+                    :value="rubro.id">
+                        {{rubro.id}}| {{rubro.titulo}}
+                </option>
+            </select>
+
+            <button @click="filtrarPorRubro()">Filtrar por rubro</button>
         </div>
 
         <br>
@@ -33,7 +44,7 @@
             </thead>
             
             <tbody>
-                <tr v-for="(articulo, id) in filtroNombreArticulo" 
+                <tr v-for="(articulo, id) in articulos" 
                         :key="id">
                     <td>{{ articulo.id }}</td>
                     <td>{{ articulo.nombre }}</td>
@@ -69,7 +80,8 @@
         mixins: [traerAPI],
 
         created(){
-            this.traerArticulos();     
+            this.traerArticulos();
+            this.traerRubros();
         },
 
         data(){
@@ -79,10 +91,19 @@
                 accion: "",
                 id: 0,
                 busqueda:"",
+                rubros: [],
+                rubroSeleccionado: 0,
             }
         },
 
         methods:{
+            filtrarPorRubro(){
+                this.traerDatosAPI(`articulos/filtro/rubro/${this.rubroSeleccionado}`)
+                .then(datos => {
+                    this.articulos = datos.articulos
+                })
+            },
+
             traerArticulos(){
                 console.log("Obteniendo ARTICULOS desde la API...");
                 this.traerDatosAPI("articulos")
@@ -91,9 +112,17 @@
                 })
             },
 
+            traerRubros(){
+                this.traerDatosAPI("rubros")
+                        .then(datos => {
+                                this.rubros = datos
+                        })
+            },
+
             desplegarABMArticulo(accion, id=0){
                 this.accion= accion;
                 this.id = id;
+                window.scrollTo(0, 0);
                 this.abrirABMarticulo = !this.abrirABMarticulo;
             },
 
@@ -103,16 +132,6 @@
                 this.accion= "";
             }
             
-        },
-
-        computed:{
-            filtroNombreArticulo(){
-                if(this.busqueda==""){
-                    return this.articulos
-                }else {
-                    return this.articulos.filter((elem)=>elem.nombre_rubro.toLowerCase().includes(this.busqueda.trim().toLowerCase()))
-                }
-            },
         },
     }
 </script>
